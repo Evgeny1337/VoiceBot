@@ -34,7 +34,7 @@ def main():
     try:
         load_dotenv(override=True)
 
-        tg_token = os.getenv("TELEGRAM_TOKEN")
+        tg_token = os.getenv("TELEGRAM_LOGS_TOKEN")
         log_chat_id = os.getenv("TG_LOG_CHAT_ID")
         setup_logging(tg_token, log_chat_id)
 

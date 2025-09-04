@@ -69,8 +69,9 @@ def main():
         load_dotenv(override=True)
 
         tg_token = os.getenv("TELEGRAM_TOKEN")
+        tg_logs_token=os.getenv("TELEGRAM_LOGS_TOKEN")
         log_chat_id = os.getenv("TG_LOG_CHAT_ID")
-        setup_logging(tg_token, log_chat_id)
+        setup_logging(tg_logs_token, log_chat_id)
 
         logger.info("Запуск Telegram бота...")
 
@@ -102,3 +103,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
