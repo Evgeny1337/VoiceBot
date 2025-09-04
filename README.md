@@ -78,8 +78,12 @@ systemctl start telegram-bot.service
 ```
 
 ## Пример работы
-Telegram бот: @voiceDetectedDevman_bot
-![Telegram](%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA%20%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0%202025-09-04%20%D0%B2%2020.30.00.png)
-VK бот: Сообщество ВК ([https://vk.com/club232492725])
-![VK](%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA%20%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0%202025-09-04%20%D0%B2%2020.30.30.png)
+<p>
+  <strong>Telegram бот</strong>: @voiceDetectedDevman_bot<br>
+  <img alt="test" src="%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA%20%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0%202025-09-04%20%D0%B2%2020.30.00.png" width="400">
+</p>
+<p >
+  <strong>VK бот</strong>: Сообщество ВК (<a href="https://vk.com/club232492725">ссылка</a>)<br>
+  <img alt="test" src="%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA%20%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0%202025-09-04%20%D0%B2%2020.30.30.png" width="400">
+</p>
 
