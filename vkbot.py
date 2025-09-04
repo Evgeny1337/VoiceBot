@@ -13,11 +13,12 @@ def echo(event, vk_api, language_code, session, session_client):
         text=event.text,
         language_code=language_code
     )
-    vk_api.messages.send(
-        user_id=event.user_id,
-        message=fulfillment_text,
-        random_id=get_random_id()
-    )
+    if fulfillment_text:
+        vk_api.messages.send(
+            user_id=event.user_id,
+            message=fulfillment_text,
+            random_id=get_random_id()
+        )
 
 
 

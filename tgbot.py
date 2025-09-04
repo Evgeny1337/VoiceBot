@@ -16,8 +16,8 @@ def echo(update: Update, context: CallbackContext):
         text=update.message.text,
         language_code=language_code
     )
-
-    context.bot.send_message(chat_id=update.effective_chat.id, text=fulfillment_text)
+    if fulfillment_text:
+        context.bot.send_message(chat_id=update.effective_chat.id, text=fulfillment_text)
 
 def start(update: Update, context: CallbackContext):
     context.bot.send_message(chat_id=update.effective_chat.id, text='Здравствуйте')
