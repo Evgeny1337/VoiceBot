@@ -28,8 +28,8 @@ def send_message(event, vk_api, language_code, you_project_id, session_client):
                 message=fulfillment_text,
                 random_id=get_random_id()
             )
-    except Exception as e:
-        logger.error(f"Ошибка в VK echo: {str(e)}")
+    except Exception:
+        logger.exception(f"Ошибка в VK echo")
         raise
 
 
@@ -55,8 +55,8 @@ def main():
         for event in longpoll.listen():
             if event.type == VkEventType.MESSAGE_NEW and event.to_me:
                 send_message(event, vk_api, language_code, you_project_id, session_client)
-    except Exception as e:
-        logger.critical(f"Критическая ошибка при запуске VK бота: {str(e)}")
+    except Exception:
+        logger.exception(f"Критическая ошибка при запуске VK бота")
         raise
 
 

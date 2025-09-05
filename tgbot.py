@@ -26,21 +26,19 @@ def send_message(update: Update, context: CallbackContext):
         )
         if fulfillment_text:
             context.bot.send_message(chat_id=update.effective_chat.id, text=fulfillment_text)
-    except Exception as e:
-        logger.error(f"Ошибка в echo: {str(e)}")
+    except Exception:
+        logger.exception(f"Ошибка в send_message")
         raise
 
 
 def start(update: Update, context: CallbackContext):
     try:
         context.bot.send_message(chat_id=update.effective_chat.id, text='Здравствуйте')
-    except Exception as e:
-        logger.error(f"Ошибка в start: {str(e)}")
+    except Exception:
+        logger.exception(f"Ошибка в start")
         raise
 
 
-def error_handler(update: Update, context: CallbackContext):
-    logger.error(f"Ошибка в обработчике: {context.error}")
 
 
 def main():
@@ -67,13 +65,13 @@ def main():
 
         dispatcher.add_handler(CommandHandler("start", start))
         dispatcher.add_handler(MessageHandler(Filters.text, send_message))
-        dispatcher.add_error_handler(error_handler)
+
 
         updater.start_polling()
         logger.info("Telegram бот запущен успешно")
 
-    except Exception as e:
-        logger.critical(f"Критическая ошибка при запуске бота: {str(e)}")
+    except Exception:
+        logger.exception(f"Критическая ошибка при запуске бота")
         raise
 
 
