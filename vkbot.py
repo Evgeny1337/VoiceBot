@@ -4,7 +4,7 @@ from dotenv import load_dotenv
 import vk_api as vk
 from vk_api.longpoll import VkLongPoll, VkEventType
 from vk_api.utils import get_random_id
-from help import detect_intent_texts
+from dialogflow_utils import detect_intent_texts
 from google.cloud import dialogflow
 from logger import setup_logging
 

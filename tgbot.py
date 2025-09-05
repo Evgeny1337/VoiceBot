@@ -1,11 +1,10 @@
-import json
 import os
 import logging
 from google.cloud import dialogflow
 from dotenv import load_dotenv
 from telegram import Update
 from telegram.ext import CallbackContext, Updater, MessageHandler, Filters, CommandHandler
-from help import detect_intent_texts, create_intent
+from dialogflow_utils import detect_intent_texts
 from logger import setup_logging
 
 logger = logging.getLogger(__name__)
@@ -34,29 +33,6 @@ def start(update: Update, context: CallbackContext):
         context.bot.send_message(chat_id=update.effective_chat.id, text='Здравствуйте')
     except Exception as e:
         logger.error(f"Ошибка в start: {str(e)}")
-        raise
-
-
-def train_intent(update: Update, context: CallbackContext):
-    try:
-        project_id = context.bot_data['project_id']
-        with open('intent.json', 'r', encoding='utf-8') as file:
-            intents_data = json.load(file)
-        created_intents = []
-        for intent_name, intent_data in intents_data.items():
-            create_intent(
-                project_id=project_id,
-                display_name=intent_name,
-                training_phrases=intent_data['questions'],
-                answer=intent_data['answer']
-            )
-            created_intents.append(intent_name)
-        context.bot.send_message(
-            chat_id=update.effective_chat.id,
-            text=f"Созданы интенты: {', '.join(created_intents)}"
-        )
-    except Exception as e:
-        logger.error(f"Ошибка в train_intent: {str(e)}")
         raise
 
 
@@ -89,7 +65,6 @@ def main():
         dispatcher.bot_data['project_id'] = you_project_id
 
         dispatcher.add_handler(CommandHandler("start", start))
-        dispatcher.add_handler(CommandHandler("train_intent", train_intent))
         dispatcher.add_handler(MessageHandler(Filters.text, echo))
         dispatcher.add_error_handler(error_handler)
 
