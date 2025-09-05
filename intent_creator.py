@@ -20,7 +20,7 @@ def train_intent(project_id, intent_file):
             created_intents.append(intent_name)
             return f"Созданы интенты: {', '.join(created_intents)}"
     except Exception as e:
-        return f"Ошибка создание интентов {e}"
+        return f"Ошибка создания интентов {e}"
 
 
 def main():

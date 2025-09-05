@@ -10,10 +10,13 @@ from logger import setup_logging
 logger = logging.getLogger(__name__)
 
 
-def echo(update: Update, context: CallbackContext):
+def send_message(update: Update, context: CallbackContext):
     try:
         session_client = context.bot_data['session_client']
-        session = context.bot_data['session']
+        project_id = context.bot_data['project_id']
+        user_id = update.message.from_user.id
+        session_id = f'tg-{user_id}'""
+        session = session_client.session_path(project_id, session_id)
         language_code = context.bot_data['language_code']
         fulfillment_text = detect_intent_texts(
             session_client=session_client,
@@ -54,18 +57,16 @@ def main():
         you_project_id = os.getenv("YOUR_PROJECT_ID")
         language_code = os.getenv("LANGUAGE_CODE")
         session_client = dialogflow.SessionsClient()
-        session = session_client.session_path(you_project_id, '123456789')
 
         updater = Updater(tg_token, use_context=True)
         dispatcher = updater.dispatcher
 
         dispatcher.bot_data['session_client'] = session_client
-        dispatcher.bot_data['session'] = session
         dispatcher.bot_data['language_code'] = language_code
         dispatcher.bot_data['project_id'] = you_project_id
 
         dispatcher.add_handler(CommandHandler("start", start))
-        dispatcher.add_handler(MessageHandler(Filters.text, echo))
+        dispatcher.add_handler(MessageHandler(Filters.text, send_message))
         dispatcher.add_error_handler(error_handler)
 
         updater.start_polling()

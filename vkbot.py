@@ -11,7 +11,10 @@ from logger import setup_logging
 logger = logging.getLogger(__name__)
 
 
-def echo(event, vk_api, language_code, session, session_client):
+def send_message(event, vk_api, language_code, you_project_id, session_client):
+    user_id = event.user_id
+    session_id = f'vk-{user_id}'
+    session = session_client.session_path(you_project_id, session_id)
     try:
         fulfillment_text = detect_intent_texts(
             session_client=session_client,
@@ -44,7 +47,6 @@ def main():
         you_project_id = os.getenv("YOUR_PROJECT_ID")
         language_code = os.getenv("LANGUAGE_CODE")
         session_client = dialogflow.SessionsClient()
-        session = session_client.session_path(you_project_id, '123456789')
 
         vk_session = vk.VkApi(token=token)
         vk_api = vk_session.get_api()
@@ -52,7 +54,7 @@ def main():
         logger.info("VK бот запущен успешно")
         for event in longpoll.listen():
             if event.type == VkEventType.MESSAGE_NEW and event.to_me:
-                echo(event, vk_api, language_code, session, session_client)
+                send_message(event, vk_api, language_code, you_project_id, session_client)
     except Exception as e:
         logger.critical(f"Критическая ошибка при запуске VK бота: {str(e)}")
         raise
